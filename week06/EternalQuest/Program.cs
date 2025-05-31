@@ -10,3 +10,6 @@ class Program
         manager.Start();
     }
 }
+/* This exceeds requiremnts by adding a level up system in the goal manager. Every 200 points
+the user levels up. I also added messages after something is completed like "good job" etc...
+*/
