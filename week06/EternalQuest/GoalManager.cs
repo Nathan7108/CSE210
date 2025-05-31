@@ -6,6 +6,10 @@ public class GoalManager
 {
     private List<Goal> _goals = new List<Goal>();
     private int _score = 0;
+    private int GetLevel()
+    {
+        return _score / 200;
+    }
 
     public void Start()
     {
@@ -13,6 +17,7 @@ public class GoalManager
         while (choice != "6")
         {
             Console.WriteLine($"\nScore: {_score}");
+            Console.WriteLine($"Level: {GetLevel()}");
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. List Goals");
             Console.WriteLine("3. Save Goals");
@@ -118,5 +123,16 @@ public class GoalManager
         int earned = _goals[index].RecordEvent();
         _score += earned;
         Console.WriteLine($"Points earned: {earned}");
+
+        string[] messages =
+        {
+            "Good Job!",
+            "Keep it up!",
+            "You're doing great!",
+            "Great Work!"
+        };
+        Random rand = new Random();
+        Console.WriteLine(messages[rand.Next(messages.Length)]);
+        }
     }
-}
+
