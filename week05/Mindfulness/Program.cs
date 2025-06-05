@@ -2,6 +2,8 @@ using System;
 
 class Program
 {
+    static Dictionary<string, int> activityLog = new Dictionary<string, int>();
+    
     static void Main()
     {
         while (true)
@@ -15,25 +17,49 @@ class Program
             Console.Write("Select an option: ");
             string choice = Console.ReadLine();
 
+        if (activityLog.Count == 0)
+        {
+            activityLog["Breathing"] = 0;
+            activityLog["Reflection"] = 0;
+            activityLog["Listing"] = 0;
+        }
+
             switch (choice)
             {
                 case "1":
                     new BreathingActivity().Run();
-                    break;
+                        activityLog["Breathing"]++;
+                        break;
                 case "2":
                     new ReflectionActivity().Run();
+                    activityLog["Reflection"]++;
                     break;
+
                 case "3":
                     new ListingActivity().Run();
+                    activityLog["Listing"]++;
                     break;
                 case "4":
-                    Console.WriteLine("Goodbye!");
+                    Console.WriteLine("\nSession Summary:");
+                    foreach (var activity in activityLog)
+                    {
+                        Console.WriteLine($"{activity.Key} Activity ran {activity.Value} time(s)");
+                    }
+
+                    Console.WriteLine("\nGoodbye!");
                     return;
-                default:
-                    Console.WriteLine("Invalid input. Try again.");
-                    Thread.Sleep(2000);
-                    break;
             }
         }
     }
 }
+
+/* Added:
+Tracks how many times each activity was performed in the session
+and prints a summary before quitting.
+
+Session Summary:
+Breathing Activity ran 0 time(s)
+Reflection Activity ran 0 time(s)
+Listing Activity ran 1 time(s)
+
+*/
