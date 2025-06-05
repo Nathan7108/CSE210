@@ -55,3 +55,7 @@ class Program
     }
 }
 
+/*EXTRA FEATURE:
+I made the journal save as a .csv file that opens in Excel.
+It adds quotes around the text so commas and quotes don't break the file.
+*/

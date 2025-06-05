@@ -23,9 +23,15 @@ public class Journal
     {
         using (StreamWriter writer = new StreamWriter(filename))
         {
+            writer.WriteLine("Date,Prompt,Response");
+
             foreach (Entry e in _entries)
             {
-                writer.WriteLine($"{e._date}|{e._prompt}|{e._response}");
+                string date = $"\"{e._date}\"";
+                string prompt = $"\"{e._prompt.Replace("\"", "\"\"")}\"";
+                string response = $"\"{e._response.Replace("\"", "\"\"")}\"";
+
+                writer.WriteLine($"{date},{prompt},{response}");
             }
         }
     }
@@ -34,15 +40,19 @@ public class Journal
     {
         _entries.Clear();
         string[] lines = File.ReadAllLines(filename);
-        foreach (string line in lines)
+
+        for (int i = 1; i < lines.Length; i++) 
         {
-            string[] parts = line.Split('|');
+            string[] parts = lines[i].Split(new[] { "\",\"" }, StringSplitOptions.None);
+
             if (parts.Length == 3)
             {
-                Entry e = new Entry(parts[0], parts[1], parts[2]);
-                _entries.Add(e);
+                string date = parts[0].Trim('"');
+                string prompt = parts[1].Trim('"');
+                string response = parts[2].Trim('"');
+
+                _entries.Add(new Entry(date, prompt, response));
             }
         }
     }
 }
-
