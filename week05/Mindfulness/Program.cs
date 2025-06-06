@@ -61,5 +61,4 @@ Session Summary:
 Breathing Activity ran 0 time(s)
 Reflection Activity ran 0 time(s)
 Listing Activity ran 1 time(s)
-
 */
