@@ -6,6 +6,8 @@ public class GoalManager
 {
     private List<Goal> _goals = new List<Goal>();
     private int _score = 0;
+    private string _filename = "goals.txt";
+
     private int GetLevel()
     {
         return _score / 200;
@@ -81,7 +83,7 @@ public class GoalManager
 
     public void SaveGoals()
     {
-        using (StreamWriter writer = new StreamWriter("goals.txt"))
+        using (StreamWriter writer = new StreamWriter(_filename))
         {
             writer.WriteLine(_score);
             foreach (Goal goal in _goals)
@@ -93,13 +95,13 @@ public class GoalManager
 
     public void LoadGoals()
     {
-        if (!File.Exists("goals.txt"))
+        if (!File.Exists(_filename))
         {
             Console.WriteLine("No goals file found.");
             return;
         }
 
-        string[] lines = File.ReadAllLines("goals.txt");
+        string[] lines = File.ReadAllLines(_filename);
         _score = int.Parse(lines[0]);
         _goals.Clear();
         for (int i = 1; i < lines.Length; i++)
