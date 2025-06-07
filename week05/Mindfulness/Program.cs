@@ -2,7 +2,12 @@ using System;
 
 class Program
 {
-    static Dictionary<string, int> activityLog = new Dictionary<string, int>();
+    static Dictionary<string, int> activityLog = new Dictionary<string, int>()
+    {
+        { "Breathing", 0 },
+        { "Reflection", 0 },
+        { "Listing", 0 }
+    };
     
     static void Main()
     {
@@ -16,13 +21,6 @@ class Program
             Console.WriteLine("4. Quit");
             Console.Write("Select an option: ");
             string choice = Console.ReadLine();
-
-        if (activityLog.Count == 0)
-        {
-            activityLog["Breathing"] = 0;
-            activityLog["Reflection"] = 0;
-            activityLog["Listing"] = 0;
-        }
 
             switch (choice)
             {
